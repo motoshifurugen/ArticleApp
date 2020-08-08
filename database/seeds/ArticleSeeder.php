@@ -15,7 +15,7 @@ class ArticleSeeder extends Seeder
 
         DB::table('articles')->insert([
             [
-                'user_id' => 2,
+                'user_id' => 1,
                 'title' => 'title1',
                 'body' => 'body1',
                 'created_at' => '2020-08-08 07:44:40',
@@ -29,7 +29,7 @@ class ArticleSeeder extends Seeder
                 'updated_at' => '2020-08-08 07:44:40'
             ],
             [
-                'user_id' => 2,
+                'user_id' => 3,
                 'title' => 'title3',
                 'body' => 'body3',
                 'created_at' => '2020-08-08 07:44:40',

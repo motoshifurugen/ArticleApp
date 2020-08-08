@@ -5,6 +5,9 @@
   <button type="button" onclick="location.href='/articles/create'">記事を作る</button>
   <br/>
 
+  <br/>
+  <h4>{{ $user->name }}の記事 &nbsp; 全 {{ $count }}記事</h4>
+
   <table border="1" cellspacing="0" cellpadding="5">
     <tr align="center">
       <th>タイトル</th>

@@ -9,12 +9,19 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
-        $article = Article::all();
+        $user_id = Auth::id();
+        $user = Auth::user();
+        $query = DB::table('articles')->where('user_id', $user_id);
+        $count = $query->count();
+        $articles = $query->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('articles.index', ['articles' => $article]);
+        return view('articles.index', compact('articles'), ['user'=>$user, 'count'=>$count]);
     }
 
     public function create()
@@ -25,12 +32,12 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $article = new Article();
-        $article->user_id = 1;
+        $article->user_id = Auth::id();
         $article->title = request('title');
         $article->body = request('body');
         $article->save();
 
-        return redirect('/articles');
+        return redirect('articles');
     }
 
     public function show(Article $article)
@@ -40,16 +47,23 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        //
+        return view('articles.edit', compact('article'));
     }
 
     public function update(Request $request, Article $article)
     {
-        //
+        $article->user_id = Auth::id();
+        $article->title = request('title');
+        $article->body = request('body');
+        $article->save();
+
+        return redirect('articles');
     }
 
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+
+        return redirect('articles');
     }
 }

@@ -19,7 +19,7 @@ class ArticleController extends Controller
         $user = Auth::user();
         $query = DB::table('articles')->where('user_id', $user_id);
         $count = $query->count();
-        $articles = $query->orderBy('created_at', 'desc')->paginate(10);
+        $articles = $query->orderBy('created_at', 'asc')->paginate(10);
 
         return view('articles.index', compact('articles'), ['user'=>$user, 'count'=>$count]);
     }

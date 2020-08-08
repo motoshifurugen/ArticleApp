@@ -29,4 +29,7 @@
       </tr>
     @endforeach
   </table>
+
+  <br />
+  <a href="/allarticles">掲示板を見る</a>
 @endsection
